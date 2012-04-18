@@ -106,6 +106,7 @@ module ActiveMerchant #:nodoc:
           else
             add_field(mapping, args.last)
           end
+          nil
         end
       end
     end
