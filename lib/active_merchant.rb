@@ -54,6 +54,7 @@ require 'rexml/document'
 
 require 'active_utils'
 require 'active_merchant/billing'
+require 'active_merchant/railtie' if defined?(Rails)
 require 'active_merchant/version'
 
 module ActiveMerchant #:nodoc:
