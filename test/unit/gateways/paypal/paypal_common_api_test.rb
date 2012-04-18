@@ -134,8 +134,8 @@ class PaypalCommonApiTest < Test::Unit::TestCase
   end
 
   def test_build_transaction_search_request
-    options = {:start_date => Date.strptime('02/21/2012', '%m/%d/%Y'),
-      :end_date => Date.strptime('03/21/2012', '%m/%d/%Y'),
+    options = {:start_date => Date.strptime('02/21/2012', '%m/%d/%Y').to_time(:utc),
+      :end_date => Date.strptime('03/21/2012', '%m/%d/%Y').to_time(:utc),
       :receiver => 'foo@example.com',
       :first_name => 'Robert'}
     request = REXML::Document.new(@gateway.send(:build_transaction_search, options))
