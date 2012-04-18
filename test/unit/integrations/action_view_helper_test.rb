@@ -62,6 +62,15 @@ if "".respond_to? :html_safe?
       end
     end
 
+    def test_extra_tags_skipped
+      with_routes do
+        get :payment_action
+
+        assert_no_match(%r{<input name="utf8" type="hidden"}, @response.body)
+        assert_no_match(%r{<input name="authenticity_token"}, @response.body)
+      end
+    end
+
     private
     def with_routes
       raise "You need to pass a block to me" unless block_given?
