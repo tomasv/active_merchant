@@ -45,7 +45,9 @@ module ActiveMerchant #:nodoc:
           integration_module = ActiveMerchant::Billing::Integrations.const_get(options.delete(:service).to_s.camelize)
 
           result = []
-          result << form_tag(integration_module.service_url, options.delete(:html) || {})
+          html_options = options.delete(:html) || {}
+          html_options[:skip_extra_tags] = true
+          result << form_tag(integration_module.service_url, html_options)
           
           service_class = integration_module.const_get('Helper')
           service = service_class.new(order, account, options)
@@ -65,6 +67,13 @@ module ActiveMerchant #:nodoc:
           
           concat(result.respond_to?(:html_safe) ? result.html_safe : result)
           nil
+        end
+
+        private
+
+        def extra_tags_for_form(html_options)
+          skip_extra_tags = html_options.delete('skip_extra_tags')
+          super if not skip_extra_tags
         end
       end
     end
