@@ -4,6 +4,7 @@ gemspec
 group :test do
   gem 'json-jruby', :platforms => :jruby
   gem 'jruby-openssl', :platforms => :jruby
+  gem 'minitest-reporters'
 
   # gateway-specific dependencies, keeping these gems out of the gemspec
   gem 'samurai', '>= 0.2.25'
