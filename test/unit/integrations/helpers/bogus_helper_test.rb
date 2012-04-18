@@ -25,4 +25,8 @@ class BogusHelperTest < Test::Unit::TestCase
     @helper.space_shuttle :name => 'Rockety'
     assert_equal fields, @helper.fields
   end
+
+  def test_method_missing
+    assert_nil @helper.nonexisting_method
+  end
 end
