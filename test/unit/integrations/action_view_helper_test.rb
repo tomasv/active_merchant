@@ -66,6 +66,7 @@ if "".respond_to? :html_safe?
       with_routes do
         get :payment_action
 
+        assert_match(%r{method="post"}, @response.body)
         assert_no_match(%r{<input name="utf8" type="hidden"}, @response.body)
         assert_no_match(%r{<input name="authenticity_token"}, @response.body)
       end

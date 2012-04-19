@@ -72,8 +72,17 @@ module ActiveMerchant #:nodoc:
         private
 
         def extra_tags_for_form(html_options)
-          skip_extra_tags = html_options.delete('skip_extra_tags')
-          super if not skip_extra_tags
+          return super if not html_options["skip_extra_tags"]
+
+          method = html_options.delete("method").to_s
+          case method
+            when /^get$/i # must be case-insensitive, but can't use downcase as might be nil
+              html_options["method"] = "get"
+            when /^post$/i, "", nil
+              html_options["method"] = "post"
+            else
+              html_options["method"] = "post"
+          end
         end
       end
     end
